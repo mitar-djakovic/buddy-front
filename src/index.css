@@ -3,8 +3,6 @@
   License: none (public domain)
 */
 
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap");
-
 html,
 body,
 div,
@@ -109,7 +107,6 @@ section {
 }
 body {
   line-height: 1;
-  font-family: "Quicksand", sans-serif;
 }
 ol,
 ul {
