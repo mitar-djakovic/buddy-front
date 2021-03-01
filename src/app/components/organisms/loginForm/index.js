@@ -5,7 +5,7 @@ import Button from '../../atoms/button';
 import { loginSchema } from './validationSchema';
 import { useStyles } from './style';
 
-const LoginForm = () => {
+const LoginForm = ({ handleFormChange }) => {
   const classes = useStyles();
 
   return (
@@ -50,7 +50,7 @@ const LoginForm = () => {
             <div className={classes.buttonContainer}>
               <Button title="Login" type="submit" size="big" variant="outline" />
             </div>
-            <p className={classes.signup}>
+            <p role="presentation" onClick={handleFormChange} className={classes.signup}>
               Dont have account?
               {' '}
               <span className={classes.signupSpan}> Signup</span>

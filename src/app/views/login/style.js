@@ -53,4 +53,11 @@ export const useStyles = createUseStyles({
   logo: {
     width: 200,
   },
+  formWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxSizing: 'border-box',
+    height: '50%',
+  },
 });

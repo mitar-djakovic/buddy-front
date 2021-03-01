@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStyles } from './style';
 import dog from '../../assets/dog.jpg';
 import logo from '../../assets/logo.png';
 import LoginForm from '../../components/organisms/loginForm';
+import SignupForm from '../../components/organisms/signupForm';
 
 const Login = () => {
   const classes = useStyles();
+  const [loginActive, setLoginActive] = useState(true);
 
   return (
     <div className={classes.wrapper}>
@@ -13,16 +15,12 @@ const Login = () => {
         <div className={classes.logoContainer}>
           <img className={classes.logo} src={logo} alt="" />
         </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxSizing: 'border-box',
-            height: '50%',
-          }}
-        >
-          <LoginForm />
+        <div className={classes.formWrapper}>
+          {loginActive ? (
+            <LoginForm handleFormChange={() => setLoginActive(false)} />
+          ) : (
+            <SignupForm handleFormChange={() => setLoginActive(true)} />
+          )}
         </div>
       </div>
       <div className={classes.infoContainer}>
