@@ -46,4 +46,11 @@ export const useStyles = createUseStyles({
   formContainer: {
     width: '50%',
   },
+  logoContainer: {
+    boxSizing: 'border-box',
+    padding: 40,
+  },
+  logo: {
+    width: 200,
+  },
 });

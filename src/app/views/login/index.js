@@ -2,6 +2,7 @@ import React from 'react';
 import { useStyles } from './style';
 import dog from '../../assets/dog.jpg';
 import logo from '../../assets/logo.png';
+import LoginForm from '../../components/organisms/loginForm';
 
 const Login = () => {
   const classes = useStyles();
@@ -9,8 +10,19 @@ const Login = () => {
   return (
     <div className={classes.wrapper}>
       <div className={classes.formContainer}>
-        <div>
-          <img src={logo} alt="" />
+        <div className={classes.logoContainer}>
+          <img className={classes.logo} src={logo} alt="" />
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxSizing: 'border-box',
+            height: '50%',
+          }}
+        >
+          <LoginForm />
         </div>
       </div>
       <div className={classes.infoContainer}>
