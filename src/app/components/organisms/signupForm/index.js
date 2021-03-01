@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../atoms/button';
 import Input from '../../atoms/input';
 import { signupSchema } from './validationSchema';
@@ -11,6 +11,7 @@ import { signup } from '../../../actions/auth';
 const SignupForm = ({ handleFormChange }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const message = useSelector((state) => state.auth.message);
 
   return (
     <Formik
@@ -22,7 +23,6 @@ const SignupForm = ({ handleFormChange }) => {
         repeatPassword: '',
       }}
       onSubmit={(values) => {
-        console.log('values', values);
         const {
           firstName, lastName, email, password, repeatPassword,
         } = values;
@@ -32,7 +32,7 @@ const SignupForm = ({ handleFormChange }) => {
       validationSchema={signupSchema}
     >
       {({
-        values, handleSubmit, handleChange, errors,
+        values, handleSubmit, handleChange, errors, touched,
       }) => (
         <Form onSubmit={handleSubmit}>
           <div className={classes.inputContainer}>
@@ -44,7 +44,7 @@ const SignupForm = ({ handleFormChange }) => {
               name="firstName"
               errorStatus={errors.firstName ? true : null}
             />
-            {errors.firstName && <p className={classes.errorMessage}>{errors.firstName}</p>}
+            {touched.firstName && errors.firstName && <p className={classes.errorMessage}>{errors.firstName}</p>}
           </div>
           <div className={classes.inputContainer}>
             <Input
@@ -55,7 +55,7 @@ const SignupForm = ({ handleFormChange }) => {
               name="lastName"
               errorStatus={errors.lastName ? true : null}
             />
-            {errors.lastName && <p className={classes.errorMessage}>{errors.lastName}</p>}
+            {touched.lastName && errors.lastName && <p className={classes.errorMessage}>{errors.lastName}</p>}
           </div>
           <div className={classes.inputContainer}>
             <Input
@@ -66,7 +66,7 @@ const SignupForm = ({ handleFormChange }) => {
               name="email"
               errorStatus={errors.email ? true : null}
             />
-            {errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
+            {touched.email && errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
           </div>
           <div className={classes.inputContainer}>
             <Input
@@ -77,7 +77,7 @@ const SignupForm = ({ handleFormChange }) => {
               name="password"
               errorStatus={errors.password ? true : null}
             />
-            {errors.password && <p className={classes.errorMessage}>{errors.password}</p>}
+            {touched.password && errors.password && <p className={classes.errorMessage}>{errors.password}</p>}
           </div>
           <div className={classes.inputContainer}>
             <Input
@@ -88,16 +88,22 @@ const SignupForm = ({ handleFormChange }) => {
               name="repeatPassword"
               errorStatus={errors.repeatPassword ? true : null}
             />
-            {errors.repeatPassword && <p className={classes.errorMessage}>{errors.repeatPassword}</p>}
+            {touched.repeatPassword && errors.repeatPassword && (
+            <p className={classes.errorMessage}>{errors.repeatPassword}</p>
+            )}
           </div>
           <div className={classes.buttonContainer}>
             <Button title="Signup" type="submit" size="big" variant="outline" />
           </div>
-          <p onClick={handleFormChange} role="presentation" className={classes.login}>
-            Allready have account?
-            {' '}
-            <span className={classes.loginSpan}>Login</span>
-          </p>
+          {message ? (
+            <p className={classes.message}>{message}</p>
+          ) : (
+            <p onClick={handleFormChange} role="presentation" className={classes.login}>
+              Allready have account?
+              {' '}
+              <span className={classes.loginSpan}>Login</span>
+            </p>
+          )}
         </Form>
       )}
     </Formik>

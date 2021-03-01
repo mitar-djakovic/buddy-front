@@ -21,4 +21,9 @@ export const useStyles = createUseStyles({
   loginSpan: {
     color: '#ff6b81',
   },
+  message: {
+    color: '#E25822',
+    fontSize: 20,
+    marginTop: 40,
+  },
 });

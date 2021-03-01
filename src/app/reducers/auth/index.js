@@ -26,6 +26,7 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: true,
+        message: payload.message,
       };
     default:
       return state;

@@ -21,6 +21,13 @@ export const signup = (firstName, lastName, email, password, repeatPassword) => 
       },
     });
   } catch (error) {
-    dispatch({ type: SIGNUP_ERROR });
+    const { data } = error.response;
+
+    dispatch({
+      type: SIGNUP_ERROR,
+      payload: {
+        message: data.message,
+      },
+    });
   }
 };
