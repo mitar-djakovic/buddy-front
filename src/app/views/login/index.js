@@ -7,7 +7,7 @@ import SignupForm from '../../components/organisms/signupForm';
 
 const Login = () => {
   const classes = useStyles();
-  const [loginActive, setLoginActive] = useState(false);
+  const [loginActive, setLoginActive] = useState(true);
 
   return (
     <div className={classes.wrapper}>

@@ -30,7 +30,6 @@ export default ({
         name={name}
         errorStatus={errorStatus}
       />
-      <div className={(classes.statusBar, errorStatus && classes.statusBarError)} />
     </div>
   );
 };

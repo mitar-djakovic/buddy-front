@@ -10,22 +10,6 @@ export const useStyles = createUseStyles({
     boxSizing: 'border-box',
     border: '2px solid #7480FF',
   },
-  statusBar: {
-    boxSizing: 'border-box',
-    width: 'calc(100% - 4px)',
-    marginLeft: 2,
-    height: 3,
-    position: 'absolute',
-    bottom: 0,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    transition: 'all 0.3s ease',
-    boxShadow: '0px 10px 20px -13px rgba(32, 56, 117, 0.35)',
-    backgroundColor: '#7480FF',
-  },
-  statusBarError: {
-    backgroundColor: 'red',
-  },
 });
 
 export const Input = styled.input`

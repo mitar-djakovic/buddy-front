@@ -1,12 +1,17 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { Formik, Form } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../atoms/input';
 import Button from '../../atoms/button';
 import { loginSchema } from './validationSchema';
 import { useStyles } from './style';
+import { login } from '../../../actions/auth';
 
 const LoginForm = ({ handleFormChange }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.auth.message);
 
   return (
     <Formik
@@ -15,13 +20,14 @@ const LoginForm = ({ handleFormChange }) => {
         password: '',
       }}
       onSubmit={(values) => {
-        console.log('values', values);
-        // dispatch(login(values.email, values.password))
+        const { email, password } = values;
+
+        dispatch(login(email, password));
       }}
       validationSchema={loginSchema}
     >
       {({
-        values, handleSubmit, handleChange, errors,
+        values, handleSubmit, handleChange, errors, touched,
       }) => (
         <Form onSubmit={handleSubmit}>
           <div>
@@ -34,7 +40,7 @@ const LoginForm = ({ handleFormChange }) => {
                 name="email"
                 errorStatus={errors.email ? true : null}
               />
-              {errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
+              {touched.email && errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
             </div>
             <div className={classes.inputContainer}>
               <Input
@@ -45,16 +51,20 @@ const LoginForm = ({ handleFormChange }) => {
                 name="password"
                 errorStatus={errors.password ? true : null}
               />
-              {errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
+              {touched.password && errors.password && <p className={classes.errorMessage}>{errors.password}</p>}
             </div>
             <div className={classes.buttonContainer}>
               <Button title="Login" type="submit" size="big" variant="outline" />
             </div>
-            <p role="presentation" onClick={handleFormChange} className={classes.signup}>
-              Dont have account?
-              {' '}
-              <span className={classes.signupSpan}> Signup</span>
-            </p>
+            {message ? (
+              <p className={classes.message}>{message}</p>
+            ) : (
+              <p role="presentation" onClick={handleFormChange} className={classes.signup}>
+                Dont have account?
+                {' '}
+                <span className={classes.signupSpan}> Signup</span>
+              </p>
+            )}
           </div>
         </Form>
       )}
