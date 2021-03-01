@@ -1,13 +1,17 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Formik, Form } from 'formik';
+import { useDispatch } from 'react-redux';
 import Button from '../../atoms/button';
 import Input from '../../atoms/input';
 import { signupSchema } from './validationSchema';
 import { useStyles } from './style';
+import { signup } from '../../../actions/auth';
 
 const SignupForm = ({ handleFormChange }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   return (
     <Formik
       initialValues={{
@@ -18,7 +22,12 @@ const SignupForm = ({ handleFormChange }) => {
         repeatPassword: '',
       }}
       onSubmit={(values) => {
-        console.log('values');
+        console.log('values', values);
+        const {
+          firstName, lastName, email, password, repeatPassword,
+        } = values;
+
+        dispatch(signup(firstName, lastName, email, password, repeatPassword));
       }}
       validationSchema={signupSchema}
     >
