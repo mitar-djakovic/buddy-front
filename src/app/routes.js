@@ -1,10 +1,11 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Home from './views/home';
 import AppLayout from './layout/appLayout';
 import AuthLayout from './layout/authLayout';
-import Login from './views/login';
+import HomeView from './views/home';
+import LoginView from './views/login';
+import WelcomeView from './views/welcome';
 
 const routesConfig = (token) => {
   const adminRoutesConfig = [
@@ -21,7 +22,7 @@ const routesConfig = (token) => {
         {
           path: '/login',
           exact: true,
-          component: () => <Login />,
+          component: () => <LoginView />,
         },
       ],
     },
@@ -35,9 +36,14 @@ const routesConfig = (token) => {
           component: () => <Redirect to="/app/home" />,
         },
         {
+          path: '/app/welcome',
+          exact: true,
+          component: () => <WelcomeView />,
+        },
+        {
           exact: true,
           path: '/app/home',
-          component: () => <Home />,
+          component: () => <HomeView />,
         },
       ],
     },

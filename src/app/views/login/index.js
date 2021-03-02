@@ -4,7 +4,7 @@ import dog from '../../assets/dog.jpg';
 import logo from '../../assets/logo.png';
 import { LoginForm, SignupForm } from '../../components/organisms';
 
-const Login = () => {
+const LoginView = () => {
   const classes = useStyles();
   const [loginActive, setLoginActive] = useState(true);
 
@@ -35,4 +35,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginView;

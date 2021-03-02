@@ -80,6 +80,7 @@ export const login = (email, password) => async (dispatch) => {
         },
       });
     }, 2000);
+    return data;
   } catch (error) {
     const { data } = error.response;
 

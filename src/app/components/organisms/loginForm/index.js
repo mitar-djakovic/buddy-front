@@ -2,6 +2,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../../atoms';
 import { loginSchema } from './validationSchema';
 import { useStyles } from './style';
@@ -10,6 +11,7 @@ import { login } from '../../../actions/auth';
 const LoginForm = ({ handleFormChange }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const histroy = useHistory();
   const message = useSelector((state) => state.auth.message);
 
   return (
@@ -21,7 +23,13 @@ const LoginForm = ({ handleFormChange }) => {
       onSubmit={(values) => {
         const { email, password } = values;
 
-        dispatch(login(email, password));
+        dispatch(login(email, password)).then((res) => {
+          if (res.profileCompleted) {
+            histroy.push('/app/home');
+          } else {
+            histroy.push('/app/welcome');
+          }
+        });
       }}
       validationSchema={loginSchema}
     >
