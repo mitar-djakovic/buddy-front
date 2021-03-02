@@ -2,8 +2,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import Input from '../../atoms/input';
-import Button from '../../atoms/button';
+import { Button, Input } from '../../atoms';
 import { loginSchema } from './validationSchema';
 import { useStyles } from './style';
 import { login } from '../../../actions/auth';

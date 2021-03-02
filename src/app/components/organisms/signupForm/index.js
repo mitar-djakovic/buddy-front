@@ -2,8 +2,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from '../../atoms/button';
-import Input from '../../atoms/input';
+import { Button, Input } from '../../atoms';
 import { signupSchema } from './validationSchema';
 import { useStyles } from './style';
 import { signup } from '../../../actions/auth';
@@ -89,7 +88,7 @@ const SignupForm = ({ handleFormChange }) => {
               errorStatus={errors.repeatPassword ? true : null}
             />
             {touched.repeatPassword && errors.repeatPassword && (
-            <p className={classes.errorMessage}>{errors.repeatPassword}</p>
+              <p className={classes.errorMessage}>{errors.repeatPassword}</p>
             )}
           </div>
           <div className={classes.buttonContainer}>

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useStyles } from './style';
 import dog from '../../assets/dog.jpg';
 import logo from '../../assets/logo.png';
-import LoginForm from '../../components/organisms/loginForm';
-import SignupForm from '../../components/organisms/signupForm';
+import { LoginForm, SignupForm } from '../../components/organisms';
 
 const Login = () => {
   const classes = useStyles();
