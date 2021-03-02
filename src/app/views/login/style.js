@@ -48,16 +48,15 @@ export const useStyles = createUseStyles({
   },
   logoContainer: {
     boxSizing: 'border-box',
-    padding: 40,
+    padding: 20,
   },
   logo: {
-    width: 200,
+    width: 150,
   },
   formWrapper: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     boxSizing: 'border-box',
-    height: '50%',
   },
 });
