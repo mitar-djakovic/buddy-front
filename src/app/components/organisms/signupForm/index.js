@@ -15,8 +15,6 @@ const SignupForm = ({ handleFormChange }) => {
   return (
     <Formik
       initialValues={{
-        firstName: '',
-        lastName: '',
         email: '',
         password: '',
         repeatPassword: '',
@@ -34,28 +32,6 @@ const SignupForm = ({ handleFormChange }) => {
         values, handleSubmit, handleChange, errors, touched,
       }) => (
         <Form onSubmit={handleSubmit}>
-          <div className={classes.inputContainer}>
-            <Input
-              placeholder="First name"
-              value={values.firstName}
-              onChange={handleChange}
-              type="text"
-              name="firstName"
-              errorStatus={errors.firstName ? true : null}
-            />
-            {touched.firstName && errors.firstName && <p className={classes.errorMessage}>{errors.firstName}</p>}
-          </div>
-          <div className={classes.inputContainer}>
-            <Input
-              placeholder="Last name"
-              value={values.lastName}
-              onChange={handleChange}
-              type="text"
-              name="lastName"
-              errorStatus={errors.lastName ? true : null}
-            />
-            {touched.lastName && errors.lastName && <p className={classes.errorMessage}>{errors.lastName}</p>}
-          </div>
           <div className={classes.inputContainer}>
             <Input
               placeholder="Email"
@@ -88,7 +64,7 @@ const SignupForm = ({ handleFormChange }) => {
               errorStatus={errors.repeatPassword ? true : null}
             />
             {touched.repeatPassword && errors.repeatPassword && (
-              <p className={classes.errorMessage}>{errors.repeatPassword}</p>
+            <p className={classes.errorMessage}>{errors.repeatPassword}</p>
             )}
           </div>
           <div className={classes.buttonContainer}>
