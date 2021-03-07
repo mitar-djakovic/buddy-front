@@ -4,11 +4,9 @@ import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input } from '../../atoms';
 import { signupSchema } from './validationSchema';
-import { useStyles } from './style';
 import { signup } from '../../../actions/auth';
 
 const SignupForm = ({ handleFormChange }) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const message = useSelector((state) => state.auth.message);
 
@@ -32,51 +30,48 @@ const SignupForm = ({ handleFormChange }) => {
         values, handleSubmit, handleChange, errors, touched,
       }) => (
         <Form onSubmit={handleSubmit}>
-          <div className={classes.inputContainer}>
+          <div>
             <Input
               placeholder="Email"
               value={values.email}
               onChange={handleChange}
               type="email"
               name="email"
-              errorStatus={errors.email ? true : null}
+              errorMessage={errors.email}
+              variant="outline"
             />
-            {touched.email && errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
           </div>
-          <div className={classes.inputContainer}>
+          <div>
             <Input
               placeholder="Password"
               value={values.password}
               onChange={handleChange}
               type="password"
               name="password"
-              errorStatus={errors.password ? true : null}
+              errorMessage={errors.password}
+              variant="underline"
             />
-            {touched.password && errors.password && <p className={classes.errorMessage}>{errors.password}</p>}
           </div>
-          <div className={classes.inputContainer}>
+          <div>
             <Input
               placeholder="Repeat password"
               value={values.repeatPassword}
               onChange={handleChange}
               type="password"
               name="repeatPassword"
-              errorStatus={errors.repeatPassword ? true : null}
+              errorMessage={errors.repeatPassword}
             />
-            {touched.repeatPassword && errors.repeatPassword && (
-            <p className={classes.errorMessage}>{errors.repeatPassword}</p>
-            )}
           </div>
-          <div className={classes.buttonContainer}>
+          <div>
             <Button title="Signup" type="submit" size="big" variant="outline" />
           </div>
           {message ? (
-            <p className={classes.message}>{message}</p>
+            <p>{message}</p>
           ) : (
-            <p onClick={handleFormChange} role="presentation" className={classes.login}>
+            <p onClick={handleFormChange} role="presentation">
               Allready have account?
               {' '}
-              <span className={classes.loginSpan}>Login</span>
+              <span>Login</span>
             </p>
           )}
         </Form>

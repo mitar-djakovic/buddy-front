@@ -5,11 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../../atoms';
 import { loginSchema } from './validationSchema';
-import { useStyles } from './style';
 import { login } from '../../../actions/auth';
 
 const LoginForm = ({ handleFormChange }) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const histroy = useHistory();
   const message = useSelector((state) => state.auth.message);
@@ -38,7 +36,7 @@ const LoginForm = ({ handleFormChange }) => {
       }) => (
         <Form onSubmit={handleSubmit}>
           <div>
-            <div className={classes.inputContainer}>
+            <div>
               <Input
                 placeholder="Email"
                 value={values.email}
@@ -47,9 +45,8 @@ const LoginForm = ({ handleFormChange }) => {
                 name="email"
                 errorStatus={errors.email ? true : null}
               />
-              {touched.email && errors.email && <p className={classes.errorMessage}>{errors.email}</p>}
             </div>
-            <div className={classes.inputContainer}>
+            <div>
               <Input
                 placeholder="Password"
                 value={values.password}
@@ -58,18 +55,17 @@ const LoginForm = ({ handleFormChange }) => {
                 name="password"
                 errorStatus={errors.password ? true : null}
               />
-              {touched.password && errors.password && <p className={classes.errorMessage}>{errors.password}</p>}
             </div>
-            <div className={classes.buttonContainer}>
+            <div>
               <Button title="Login" type="submit" size="big" variant="outline" />
             </div>
             {message ? (
-              <p className={classes.message}>{message}</p>
+              <p>{message}</p>
             ) : (
-              <p role="presentation" onClick={handleFormChange} className={classes.signup}>
+              <p role="presentation" onClick={handleFormChange}>
                 Dont have account?
                 {' '}
-                <span className={classes.signupSpan}> Signup</span>
+                <span> Signup</span>
               </p>
             )}
           </div>

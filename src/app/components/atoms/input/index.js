@@ -1,35 +1,29 @@
+/* eslint-disable max-len */
 import React from 'react';
-import { Input, useStyles } from './style';
+import { StandardInput, OutlineInput, UnderLineInput } from './style';
 
 export default ({
-  placeholder, value, onChange, type, name, errorStatus, variant,
+  placeholder, value, onChange, type, name, errorMessage, variant,
 }) => {
-  const classes = useStyles();
   if (variant === 'outline') {
     return (
-      <div className={classes.outlineContainer}>
-        <Input
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          type={type}
-          name={name}
-          errorStatus={errorStatus}
-          variant={variant}
-        />
+      <div>
+        <OutlineInput placeholder={placeholder} name={name} type={type} value={value} onChange={onChange} />
       </div>
     );
   }
+
+  if (variant === 'underline') {
+    return (
+      <div>
+        <UnderLineInput placeholder={placeholder} id={name} name={name} type={type} value={value} onChange={onChange} />
+      </div>
+    );
+  }
+
   return (
-    <div className={classes.inputContainer}>
-      <Input
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        type={type}
-        name={name}
-        errorStatus={errorStatus}
-      />
+    <div>
+      <StandardInput placeholder={placeholder} name={name} type={type} value={value} onChange={onChange} />
     </div>
   );
 };

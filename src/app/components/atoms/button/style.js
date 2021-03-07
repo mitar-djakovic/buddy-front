@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { createUseStyles } from 'react-jss';
 
 export const Button = styled.button`
   border: none;
@@ -76,17 +75,3 @@ export const OutlineButton = styled.button`
     ${({ color }) => ({ backgroundColor: color, color: '#FFF' })}
   }
 `;
-
-export const useStyles = createUseStyles({
-  buttonContent: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  iconWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 8,
-  },
-});

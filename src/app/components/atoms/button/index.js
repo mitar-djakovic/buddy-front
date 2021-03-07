@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, useStyles, OutlineButton } from './style';
+import { Button, OutlineButton } from './style';
 
 export default ({
   title,
@@ -13,12 +13,11 @@ export default ({
   icon,
   variant,
 }) => {
-  const classes = useStyles();
   const renderWhenLoading = () => <p>loading...</p>;
 
   const renderWhenNotLoading = () => (
-    <div className={classes.buttonContent}>
-      <div className={classes.iconWrapper}>{icon}</div>
+    <div>
+      <div>{icon}</div>
       <div>{title}</div>
     </div>
   );
