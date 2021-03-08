@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,10 +5,12 @@ import { useHistory } from 'react-router-dom';
 import { Button, Input } from '../../atoms';
 import { loginSchema } from './validationSchema';
 import { login } from '../../../actions/auth';
+import { useStyles } from './style';
 
 const LoginForm = ({ handleFormChange }) => {
   const dispatch = useDispatch();
   const histroy = useHistory();
+  const classes = useStyles();
   const message = useSelector((state) => state.auth.message);
 
   return (
@@ -23,47 +24,48 @@ const LoginForm = ({ handleFormChange }) => {
 
         dispatch(login(email, password)).then((res) => {
           if (res.profileCompleted) {
-            histroy.push('/app/home');
+            setTimeout(() => {
+              histroy.push('/app/home');
+            }, 2000);
           } else {
-            histroy.push('/app/welcome');
+            setTimeout(() => {
+              histroy.push('/app/welcome');
+            }, 2000);
           }
         });
       }}
       validationSchema={loginSchema}
     >
       {({
-        values, handleSubmit, handleChange, errors, touched,
+        values, handleSubmit, handleChange, errors,
       }) => (
         <Form onSubmit={handleSubmit}>
           <div>
-            <div>
-              <Input
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange}
-                type="email"
-                name="email"
-                errorMessage={errors.email}
-              />
+            <Input
+              placeholder="Email"
+              value={values.email}
+              onChange={handleChange}
+              type="email"
+              name="email"
+              errorMessage={errors.email}
+            />
+            <Input
+              placeholder="Password"
+              value={values.password}
+              onChange={handleChange}
+              type="password"
+              name="password"
+              errorMessage={errors.password}
+            />
+            <Button title="Login" type="submit" size="big" variant="outline" />
+            <div className={classes.messagesContainer}>
+              <p>{message}</p>
+              <p role="presentation" onClick={handleFormChange}>
+                Dont have account?
+                {' '}
+                <span> Signup</span>
+              </p>
             </div>
-            <div>
-              <Input
-                placeholder="Password"
-                value={values.password}
-                onChange={handleChange}
-                type="password"
-                name="password"
-                errorMessage={errors.password}
-              />
-            </div>
-            <div>
-              <Button title="Login" type="submit" size="big" variant="outline" />
-            </div>
-            <p role="presentation" onClick={handleFormChange}>
-              Dont have account?
-              {' '}
-              <span> Signup</span>
-            </p>
           </div>
         </Form>
       )}
