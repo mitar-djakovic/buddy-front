@@ -10,7 +10,6 @@ import {
 const initialState = {
   loading: false,
   error: false,
-  message: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -26,14 +25,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: false,
-        message: payload.message,
       };
     case SIGNUP_ERROR:
       return {
         ...state,
         loading: false,
         error: true,
-        message: payload.message,
       };
     case LOGIN_REQUEST:
       return {
@@ -46,14 +43,12 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         error: false,
-        message: payload.message,
       };
     case LOGIN_ERROR:
       return {
         ...state,
         loading: false,
         error: true,
-        message: payload.message,
       };
     default:
       return state;

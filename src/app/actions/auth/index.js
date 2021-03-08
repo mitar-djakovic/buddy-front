@@ -22,9 +22,6 @@ export const signup = (email, password, repeatPassword) => async (dispatch) => {
 
     dispatch({
       type: SIGNUP_SUCCESS,
-      payload: {
-        message: data.message,
-      },
     });
 
     return data;
@@ -33,10 +30,9 @@ export const signup = (email, password, repeatPassword) => async (dispatch) => {
 
     dispatch({
       type: SIGNUP_ERROR,
-      payload: {
-        message: data.message,
-      },
     });
+
+    return data;
   }
 };
 
@@ -51,15 +47,13 @@ export const login = (email, password) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_SUCCESS,
-      payload: {
-        message: data.message,
-      },
     });
 
     return data;
   } catch (error) {
     const { data } = error.response;
 
-    dispatch({ type: LOGIN_ERROR, payload: { message: data.message } });
+    dispatch({ type: LOGIN_ERROR });
+    return data;
   }
 };
