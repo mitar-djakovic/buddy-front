@@ -38,7 +38,6 @@ const SignupForm = ({ handleFormChange }) => {
               type="email"
               name="email"
               errorMessage={errors.email}
-              variant="outline"
             />
           </div>
           <div>
@@ -49,7 +48,6 @@ const SignupForm = ({ handleFormChange }) => {
               type="password"
               name="password"
               errorMessage={errors.password}
-              variant="underline"
             />
           </div>
           <div>
@@ -63,17 +61,14 @@ const SignupForm = ({ handleFormChange }) => {
             />
           </div>
           <div>
-            <Button title="Signup" type="submit" size="big" variant="outline" />
+            <Button title="Signup" type="submit" />
           </div>
-          {message ? (
-            <p>{message}</p>
-          ) : (
-            <p onClick={handleFormChange} role="presentation">
-              Allready have account?
-              {' '}
-              <span>Login</span>
-            </p>
-          )}
+          {message}
+          <p onClick={handleFormChange} role="presentation">
+            Allready have account?
+            {' '}
+            <span>Login</span>
+          </p>
         </Form>
       )}
     </Formik>

@@ -27,14 +27,6 @@ export const signup = (firstName, lastName, email, password, repeatPassword) => 
         message: data.message,
       },
     });
-    setTimeout(() => {
-      dispatch({
-        type: SIGNUP_SUCCESS,
-        payload: {
-          message: '',
-        },
-      });
-    }, 2000);
   } catch (error) {
     const { data } = error.response;
 
@@ -44,15 +36,6 @@ export const signup = (firstName, lastName, email, password, repeatPassword) => 
         message: data.message,
       },
     });
-
-    setTimeout(() => {
-      dispatch({
-        type: SIGNUP_ERROR,
-        payload: {
-          message: '',
-        },
-      });
-    }, 2000);
   }
 };
 
@@ -72,27 +55,10 @@ export const login = (email, password) => async (dispatch) => {
       },
     });
 
-    setTimeout(() => {
-      dispatch({
-        type: LOGIN_SUCCESS,
-        payload: {
-          message: '',
-        },
-      });
-    }, 2000);
     return data;
   } catch (error) {
     const { data } = error.response;
 
     dispatch({ type: LOGIN_ERROR, payload: { message: data.message } });
-
-    setTimeout(() => {
-      dispatch({
-        type: LOGIN_ERROR,
-        payload: {
-          message: '',
-        },
-      });
-    }, 2000);
   }
 };

@@ -1,29 +1,25 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { StandardInput, OutlineInput, UnderLineInput } from './style';
+import { Input } from '@chakra-ui/react';
+import { useStyles } from './style';
 
 export default ({
-  placeholder, value, onChange, type, name, errorMessage, variant,
+  placeholder, value, onChange, name, type, errorMessage,
 }) => {
-  if (variant === 'outline') {
-    return (
-      <div>
-        <OutlineInput placeholder={placeholder} name={name} type={type} value={value} onChange={onChange} />
-      </div>
-    );
-  }
-
-  if (variant === 'underline') {
-    return (
-      <div>
-        <UnderLineInput placeholder={placeholder} id={name} name={name} type={type} value={value} onChange={onChange} />
-      </div>
-    );
-  }
+  const classes = useStyles();
 
   return (
-    <div>
-      <StandardInput placeholder={placeholder} name={name} type={type} value={value} onChange={onChange} />
+    <div className={classes.inputContainer}>
+      <Input
+        onChange={onChange}
+        value={value}
+        name={name}
+        colorScheme="teal"
+        placeholder={placeholder}
+        type={type}
+        maxWidth
+      />
+      <p className={classes.errorMessage}>{errorMessage}</p>
     </div>
   );
 };

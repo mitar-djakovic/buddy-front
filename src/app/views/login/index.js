@@ -1,34 +1,23 @@
 import React, { useState } from 'react';
-import dog from '../../assets/dog.jpg';
 import logo from '../../assets/logo.png';
 import { LoginForm, SignupForm } from '../../components/organisms';
-import './style.scss';
+import { useStyles } from './style';
 
 const LoginView = () => {
+  const classes = useStyles();
   const [loginActive, setLoginActive] = useState(false);
 
   return (
-    <div>
-      <div>
-        <div>
-          <img src={logo} alt="" />
-        </div>
-        <div>
-          {loginActive ? (
-            <LoginForm handleFormChange={() => setLoginActive(false)} />
-          ) : (
-            <SignupForm handleFormChange={() => setLoginActive(true)} />
-          )}
-        </div>
+    <div className={classes.view}>
+      <div className={classes.logoContainer}>
+        <img className={classes.logo} src={logo} alt="" />
       </div>
-      <div>
-        <img src={dog} alt="" />
-        <div>
-          <h1>Adopt.</h1>
-          <h2>Dont Shop.</h2>
-          <div />
-          <p>Find a best friend.</p>
-        </div>
+      <div className={classes.formContainer}>
+        {loginActive ? (
+          <LoginForm handleFormChange={() => setLoginActive(false)} />
+        ) : (
+          <SignupForm handleFormChange={() => setLoginActive(true)} />
+        )}
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ const LoginForm = ({ handleFormChange }) => {
                 onChange={handleChange}
                 type="email"
                 name="email"
-                errorStatus={errors.email ? true : null}
+                errorMessage={errors.email}
               />
             </div>
             <div>
@@ -53,21 +53,17 @@ const LoginForm = ({ handleFormChange }) => {
                 onChange={handleChange}
                 type="password"
                 name="password"
-                errorStatus={errors.password ? true : null}
+                errorMessage={errors.password}
               />
             </div>
             <div>
               <Button title="Login" type="submit" size="big" variant="outline" />
             </div>
-            {message ? (
-              <p>{message}</p>
-            ) : (
-              <p role="presentation" onClick={handleFormChange}>
-                Dont have account?
-                {' '}
-                <span> Signup</span>
-              </p>
-            )}
+            <p role="presentation" onClick={handleFormChange}>
+              Dont have account?
+              {' '}
+              <span> Signup</span>
+            </p>
           </div>
         </Form>
       )}
