@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useToast } from '@chakra-ui/react';
 import { Button, Input } from '../../atoms';
 import { signupSchema } from './validationSchema';
 import { signup } from '../../../actions/auth';
@@ -9,7 +10,7 @@ import { useStyles } from './style';
 const SignupForm = ({ handleFormChange }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const message = useSelector((state) => state.auth.message);
+  const toast = useToast();
 
   return (
     <Formik
@@ -19,11 +20,16 @@ const SignupForm = ({ handleFormChange }) => {
         repeatPassword: '',
       }}
       onSubmit={(values) => {
-        const {
-          firstName, lastName, email, password, repeatPassword,
-        } = values;
+        const { email, password, repeatPassword } = values;
 
-        dispatch(signup(firstName, lastName, email, password, repeatPassword));
+        dispatch(signup(email, password, repeatPassword)).then((res) => {
+          toast({
+            title: res.message,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
+        });
       }}
       validationSchema={signupSchema}
     >
@@ -57,7 +63,6 @@ const SignupForm = ({ handleFormChange }) => {
           />
           <Button title="Signup" type="submit" />
           <div className={classes.messagesContainer}>
-            <p>{message}</p>
             <p onClick={handleFormChange} role="presentation">
               Allready have account?
               {' '}

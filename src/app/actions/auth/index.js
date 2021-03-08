@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 import axios from 'axios';
 import {
@@ -9,13 +10,11 @@ import {
   LOGIN_ERROR,
 } from '../../constants';
 
-export const signup = (firstName, lastName, email, password, repeatPassword) => async (dispatch) => {
+export const signup = (email, password, repeatPassword) => async (dispatch) => {
   dispatch({ type: SIGNUP_REQUEST });
 
   try {
     const { data } = await axios.post('http://localhost:8000/api/auth/signup', {
-      firstName,
-      lastName,
       email,
       password,
       repeatPassword,
@@ -27,6 +26,8 @@ export const signup = (firstName, lastName, email, password, repeatPassword) => 
         message: data.message,
       },
     });
+
+    return data;
   } catch (error) {
     const { data } = error.response;
 

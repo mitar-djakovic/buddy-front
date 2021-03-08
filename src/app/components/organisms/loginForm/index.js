@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
 import { Button, Input } from '../../atoms';
 import { loginSchema } from './validationSchema';
 import { login } from '../../../actions/auth';
@@ -11,7 +12,7 @@ const LoginForm = ({ handleFormChange }) => {
   const dispatch = useDispatch();
   const histroy = useHistory();
   const classes = useStyles();
-  const message = useSelector((state) => state.auth.message);
+  const toast = useToast();
 
   return (
     <Formik
@@ -23,14 +24,20 @@ const LoginForm = ({ handleFormChange }) => {
         const { email, password } = values;
 
         dispatch(login(email, password)).then((res) => {
+          toast({
+            title: res.message,
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+          });
           if (res.profileCompleted) {
             setTimeout(() => {
               histroy.push('/app/home');
-            }, 2000);
+            }, 3000);
           } else {
             setTimeout(() => {
               histroy.push('/app/welcome');
-            }, 2000);
+            }, 3000);
           }
         });
       }}
@@ -59,7 +66,6 @@ const LoginForm = ({ handleFormChange }) => {
             />
             <Button title="Login" type="submit" size="big" variant="outline" />
             <div className={classes.messagesContainer}>
-              <p>{message}</p>
               <p role="presentation" onClick={handleFormChange}>
                 Dont have account?
                 {' '}
