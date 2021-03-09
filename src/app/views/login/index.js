@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../assets/logo.png';
-import { LoginForm, SignupForm } from '../../components/organisms';
+import { LoginForm, SignupForm } from '../../components';
 import { useStyles } from './style';
 
 const LoginView = () => {
