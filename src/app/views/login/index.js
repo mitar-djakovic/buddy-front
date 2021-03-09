@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import logo from '../../assets/logo.png';
 import { LoginForm, SignupForm } from '../../components';
 import { useStyles } from './style';
 
 const LoginView = () => {
   const classes = useStyles();
-  const [loginActive, setLoginActive] = useState(false);
+  const [loginActive, setLoginActive] = useState(true);
+  const loading = useSelector((state) => state.auth.loading);
 
   return (
     <div className={classes.view}>
@@ -14,9 +16,9 @@ const LoginView = () => {
       </div>
       <div className={classes.formContainer}>
         {loginActive ? (
-          <LoginForm handleFormChange={() => setLoginActive(false)} />
+          <LoginForm loading={loading} handleFormChange={() => setLoginActive(false)} />
         ) : (
-          <SignupForm handleFormChange={() => setLoginActive(true)} />
+          <SignupForm loading={loading} handleFormChange={() => setLoginActive(true)} />
         )}
       </div>
     </div>

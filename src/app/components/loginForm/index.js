@@ -8,7 +8,7 @@ import { loginSchema } from './validationSchema';
 import { login } from '../../actions/auth';
 import { useStyles } from './style';
 
-const LoginForm = ({ handleFormChange }) => {
+const LoginForm = ({ handleFormChange, loading }) => {
   const dispatch = useDispatch();
   const histroy = useHistory();
   const classes = useStyles();
@@ -26,15 +26,18 @@ const LoginForm = ({ handleFormChange }) => {
         dispatch(login(email, password)).then((res) => {
           toast({
             title: res.message,
-            status: 'success',
+            status: res.token ? 'success' : 'error',
             duration: 3000,
             isClosable: true,
           });
-          if (res.profileCompleted) {
+
+          if (res.token && res.profileCompleted) {
             setTimeout(() => {
               histroy.push('/app/home');
             }, 3000);
-          } else {
+          }
+
+          if (res.token && !res.profileCompleted) {
             setTimeout(() => {
               histroy.push('/app/welcome');
             }, 3000);
@@ -54,7 +57,7 @@ const LoginForm = ({ handleFormChange }) => {
                 onChange={handleChange}
                 type="email"
                 name="email"
-                isInvalid={errors.email}
+                isInvalid={touched.email && !values.email}
                 maxWidth
               />
               {touched.email && <p className={classes.errorMessage}>{errors.email}</p>}
@@ -67,13 +70,13 @@ const LoginForm = ({ handleFormChange }) => {
                 onChange={handleChange}
                 type="password"
                 name="password"
-                isInvalid={errors.password}
+                isInvalid={touched.password && !values.password}
                 maxWidth
               />
               {touched.password && <p className={classes.errorMessage}>{errors.password}</p>}
             </div>
             <div className={classes.buttonContainer}>
-              <Button type="submit" colorScheme="teal">
+              <Button isLoading={loading} type="submit" colorScheme="teal">
                 Login
               </Button>
             </div>

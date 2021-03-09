@@ -8,7 +8,7 @@ import { signupSchema } from './validationSchema';
 import { signup } from '../../actions/auth';
 import { useStyles } from './style';
 
-const SignupForm = ({ handleFormChange }) => {
+const SignupForm = ({ handleFormChange, loading }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const toast = useToast();
@@ -26,7 +26,7 @@ const SignupForm = ({ handleFormChange }) => {
         dispatch(signup(email, password, repeatPassword)).then((res) => {
           toast({
             title: res.message,
-            status: 'success',
+            status: res.error ? 'error' : 'success',
             duration: 3000,
             isClosable: true,
           });
@@ -44,7 +44,7 @@ const SignupForm = ({ handleFormChange }) => {
               onBlur={handleBlur}
               type="email"
               name="email"
-              isInvalid={errors.email}
+              isInvalid={touched.email && !values.email}
               maxWidth
             />
             {touched.email && <p className={classes.errorMessage}>{errors.email}</p>}
@@ -57,7 +57,7 @@ const SignupForm = ({ handleFormChange }) => {
               onBlur={handleBlur}
               type="password"
               name="password"
-              isInvalid={errors.password}
+              isInvalid={touched.password && !values.password}
               maxWidth
             />
             {touched.password && <p className={classes.errorMessage}>{errors.password}</p>}
@@ -70,13 +70,13 @@ const SignupForm = ({ handleFormChange }) => {
               type="password"
               name="repeatPassword"
               onBlur={handleBlur}
-              isInvalid={errors.repeatPassword}
+              isInvalid={touched.repeatPassword && !values.repeatPassword}
               maxWidth
             />
             {touched.repeatPassword && <p className={classes.errorMessage}>{errors.repeatPassword}</p>}
           </div>
           <div className={classes.buttonContainer}>
-            <Button type="submit" colorScheme="teal">
+            <Button isLoading={loading} type="submit" colorScheme="teal">
               Signup
             </Button>
           </div>
